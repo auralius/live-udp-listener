@@ -1,4 +1,4 @@
-function live_udp_plotter(port, buffer_size, n_channel, interval)
+function live_udp_plotter()
 
 % Listens to a UDP port and plot the data
 % Data must be packed and sent in arrays of double
@@ -15,6 +15,23 @@ close all;
 clc;
 
 % =========================================================================
+
+prompt = {'Port:', 'Buffer size:', 'Number of channels:', 'Interval (s):'};
+dlg_title = 'live_udp_plotter';
+num_lines = 1;
+defaultans = {'12345','100', '2', '0.3'};
+answer = inputdlg(prompt, dlg_title, num_lines, defaultans);
+
+if isempty(answer)
+    fprintf('cancelled...\nbye...')
+    return;
+end
+
+port = str2double(answer{1});
+buffer_size = str2double(answer{2});
+n_channel = str2double(answer{3});
+interval = str2double(answer{4});
+
 colors = {'y', 'm', 'c', 'r', 'g', 'b', 'w', 'k'};
 
 h = figure;
